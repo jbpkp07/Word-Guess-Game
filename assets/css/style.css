@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+.lettersGrid {
+    background: black;
+    border: 2px solid black;
+    left: 25px;
+    position: absolute;
+    top: 50px;
+    width: 420px;
+}
+
+.letter {
+    border: 3px solid rgb(19, 221, 19);
+    border-radius: 10px;
+    color: rgb(19, 221, 19);
+    font-size: 30pt;
+    font-weight: 600;
+    height: 60px;
+    line-height: 1.0;
+    margin: 5px 0px 5px 0px;
+    padding-top: 5px;
+    position: relative;
+    right: 10px;
+    text-align: center;
+    width: 60px;
+}
