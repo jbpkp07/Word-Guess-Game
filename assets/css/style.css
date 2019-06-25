@@ -11,10 +11,23 @@
     width: 420px;
 }
 
+
 .letter {
     border: 3px solid rgb(19, 221, 19);
-    border-radius: 10px;
     color: rgb(19, 221, 19);
+    transition-duration: 1.25s;
+    transition-property: color, border;
+}
+
+.letter-selected {
+    border: 3px solid #555555;
+    color: #333333;
+    transition-duration: 1.25s;
+    transition-property: color, border;
+}
+
+.letter, .letter-selected {
+    border-radius: 10px;
     font-size: 30pt;
     font-weight: 600;
     height: 60px;
@@ -26,3 +39,4 @@
     text-align: center;
     width: 60px;
 }
+

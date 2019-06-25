@@ -193,3 +193,18 @@ class CategoryPhrases {
 //     }
 //     console.log(historyList);
 // };
+
+let clicked = false;
+
+A_Btn.addEventListener("click", (event) => {
+
+    if (!clicked) {
+        A_Btn.className = "letter-selected";
+        clicked = true;
+    } 
+    else {
+        A_Btn.className = "letter";
+        clicked = false;
+    }
+
+});
