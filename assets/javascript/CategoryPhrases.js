@@ -19,6 +19,7 @@ class Letter {
 
 class CategoryPhrase {
     constructor(category, phrase) {
+
         this._category = category;
         this._phrase = phrase;
         this._lettersList = [];
@@ -27,6 +28,7 @@ class CategoryPhrase {
     }
 
     buildLettersList() {
+
         for (let ch of this._phrase) {
             if (ch !== ' ') {
                 this._lettersList.push(new Letter(ch.toUpperCase()));
@@ -35,6 +37,7 @@ class CategoryPhrase {
     }
 
     resetLettersList() {
+
         for (let letter of this._lettersList) {
             letter.resetAsPicked();
         }
@@ -147,7 +150,6 @@ class CategoryPhrases {
                 this._history.push(nextPhrase);
                 break;
             }
-
         }
         while (this._history.includes(nextPhrase));
 
@@ -160,11 +162,10 @@ class CategoryPhrases {
 
 
 
+// let myCP = new CategoryPhrases();
 
-// let myCW = new CategoryPhrases();
 
-
-// for (let catPhrase of myCW.categoryPhrasesList) {
+// for (let catPhrase of myCP.categoryPhrasesList) {
 
 //     let chars = "";
 
@@ -177,7 +178,7 @@ class CategoryPhrases {
 
 
 // document.onkeyup = function (event) {
-//     let testBlah = myCW.getNextPhrase();
+//     let testBlah = myCP.getNextPhrase();
 
 
 //     console.log("Next Phrase : " + testBlah.phrase);
@@ -187,24 +188,10 @@ class CategoryPhrases {
 
 //     testBlah.resetLettersList();
 
-//     var historyList = "";
-//     for (let item of myCW._history) {
+//     let historyList = "";
+//     for (let item of myCP._history) {
 //         historyList += item.phrase + ", ";
 //     }
 //     console.log(historyList);
 // };
 
-let clicked = false;
-
-A_Btn.addEventListener("click", (event) => {
-
-    if (!clicked) {
-        A_Btn.className = "letter-selected";
-        clicked = true;
-    } 
-    else {
-        A_Btn.className = "letter";
-        clicked = false;
-    }
-
-});
