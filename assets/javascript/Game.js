@@ -5,10 +5,20 @@ class Game {
     constructor() { }
 
     startGame() {
-        
+
+        let controller = new Controller();
+
+        controller.waitForStartSequenceToFinish();
 
 
-        // let controller = new Controller();
+        // function sleep(seconds) 
+        // {
+        //   var e = new Date().getTime() + (seconds * 1000);
+        //   while (new Date().getTime() <= e) {}
+        // }
+
+        // sleep(5);
+
 
         // controller.beginNextPhrase();
 
@@ -66,3 +76,24 @@ class Game {
 let launcher = new Game();
 
 launcher.startGame();
+
+let flag = false;
+
+
+// function waitFor(conditionFunction) {
+
+//     const poll = resolve => {
+//         if (conditionFunction()) { 
+//             resolve();
+//         }
+//         else { 
+//             setTimeout( () => poll(resolve), 100);
+//         }
+//     }
+
+//     return new Promise(poll);
+// }
+
+
+// waitFor( () => flag === true)
+//   .then( () => console.log('the wait is over!'));

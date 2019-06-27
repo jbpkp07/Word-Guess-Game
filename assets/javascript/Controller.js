@@ -6,8 +6,11 @@ class Controller {
 
         this._View = new View();
         this._Model = new Model();
+        this._StartSequenceInitiated = false;
 
         //HTML button elements-------------------------------------------------
+        this.Start_Btn = document.getElementById("showStartBtn");
+
         this.A_Btn = document.getElementById("A-btn");
         this.B_Btn = document.getElementById("B-btn");
         this.C_Btn = document.getElementById("C-btn");
@@ -71,6 +74,8 @@ class Controller {
         });
 
         //Mouse listeners------------------------------------------------------
+        this.Start_Btn.addEventListener("click", (event) => { this.beginStartSequence(); });
+
         this.A_Btn.addEventListener("click", (event) => { this.selectLetter(this.A_Btn); });
         this.B_Btn.addEventListener("click", (event) => { this.selectLetter(this.B_Btn); });
         this.C_Btn.addEventListener("click", (event) => { this.selectLetter(this.C_Btn); });
@@ -99,6 +104,30 @@ class Controller {
         this.Z_Btn.addEventListener("click", (event) => { this.selectLetter(this.Z_Btn); });
     }
 
+    beginStartSequence() {
+
+        if (!this._StartSequenceInitiated) {
+
+            this._StartSequenceInitiated = true;
+
+            this._View.startSequence();
+        }
+    }
+
+    waitForStartSequenceToFinish() {
+        console.log(this._View.startSequenceFinished);
+
+        this._View.waitFor(() => this._View.startSequenceFinished === true)
+            .then(() => {
+                this.beginNextPhrase();
+            });
+
+
+    }
+
+
+
+
     selectLetter(btnElem) {
 
         if (!this._Model.letterElementsSelected.includes(btnElem)) {
@@ -113,7 +142,7 @@ class Controller {
 
     unSelectAllLetters() {
 
-        for (let btnElem of this._Model.lettersSelected) {
+        for (let btnElem of this._Model.letterElementsSelected) {
 
             this._View.unSelectButton(btnElem);
         }
@@ -122,6 +151,8 @@ class Controller {
     }
 
     beginNextPhrase() {
+
+        this.unSelectAllLetters();
 
         this._Model.assignNextPhrase();
 

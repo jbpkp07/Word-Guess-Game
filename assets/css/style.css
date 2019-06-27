@@ -3,6 +3,7 @@
 }
 
 body, html {
+    color: rgb(19, 221, 19);
     height: 100%;
     margin: 0;
     overflow-x: hidden;
@@ -29,13 +30,59 @@ body, html {
     overflow: auto;  
 }
 
-#startGame {
-    color: rgb(19, 221, 19);
-    font-size: 18pt;
+#showStartGame {
     position: fixed;
     text-align: center;
-    top: 35%;
+    top: 40%;
     width: 100%;
+}
+
+#hideStartGame {
+    display: none;
+}
+
+#showStartBtn, #hideStartBtn { 
+    border-radius: 15px;
+    font-size: 24pt;
+    margin: 0 auto;
+    padding: 10px 10px 15px 10px;
+    width: 400px;
+}
+
+#showStartBtn {
+    border: 3px solid rgb(19, 221, 19);
+}
+
+#hideStartBtn {
+    border: 3px solid black;
+    color: black;
+    transition-duration: 2s;
+    transition-property: color, border;
+}
+
+#showInstructions, #hideInstructions, #fadeInstructions {
+    bottom: 60px;
+    font-size: 18pt;
+    margin: 0 auto;
+    position: relative;
+    width: 960px;
+}
+
+#showInstructions {
+    color: rgb(19, 221, 19);
+    transition-duration: 3s;
+    transition-property: color;
+}
+
+#hideInstructions {
+    color: black;
+    visibility: hidden;
+}
+
+#fadeInstructions {
+    color: black;
+    transition-duration: 3s;
+    transition-property: color;
 }
 
 .hideMain {
@@ -43,7 +90,6 @@ body, html {
 }
 
 .category {
-    color: rgb(19, 221, 19);
     font-size: 18pt;
     position: fixed;
     text-align: center;
@@ -65,8 +111,7 @@ body, html {
 }
 
 .phrase {
-    color: rgb(19, 221, 19);
-    font-family: 'VT323', monospace;
+    /* font-family: 'VT323', monospace; */
     font-family: monospace;
     font-size: 64pt;
     font-weight: 100;
@@ -93,7 +138,6 @@ body, html {
 
 .letter {
     border: 2px solid rgb(19, 221, 19);
-    color: rgb(19, 221, 19);
     transition-duration: 1.25s;
     transition-property: color, border;
 }
