@@ -1,51 +1,68 @@
 "use strict";
 
-
 class Game {
-    constructor() {
-        this._phraseLibrary = new CategoryPhrases();
+
+    constructor() { }
+
+    startGame() {
         
+
+
+        // let controller = new Controller();
+
+        // controller.beginNextPhrase();
+
+
+
+        // document.addEventListener("keyup", (event) => {
+
+        //     let zoomed = true;
+
+        //     let keyPressed = event.key.toUpperCase();
+
+        //     switch (keyPressed) {
+        //         case "SHIFT":
+        //             this._Controller.unSelectAllLetters();
+        //             if (zoomed) {
+        //                 this._Controller._View.unZoomBackground();
+        //                 zoomed = false;
+        //             }
+        //             else {
+        //                 this._Controller._View.zoomBackground();
+        //                 zoomed = true;
+        //             }
+
+        //             break;
+        //     }
+
+        //     let nextPhrase = controller._CategoryPhrases.getNextPhrase();
+
+        //     controller._View.updateCategory(nextPhrase.category);
+
+        //     let builtPhrase = "";
+
+        //     for (let ltr of nextPhrase.lettersList) {
+        //         if (ltr.hasPicked === true) {
+        //             builtPhrase += ltr.letter;
+        //         }
+        //         else {
+        //             builtPhrase += "_";
+        //         }
+
+        //     }
+        //     console.log(nextPhrase.phrase);
+
+        //     for (let ltr of nextPhrase.lettersList) {
+        //         console.log(ltr.letter + " : " + ltr.hasPicked);
+        //     }
+
+        //     //controller._View.updatePhrase(builtPhrase);
+        // });
     }
 
-    displayGame() {
-      
-    }
 
 }
 
+let launcher = new Game();
 
-
-
-
-
-
-
-// for (let catPhrase of myCW.categoryPhrasesList) {
-
-//     let chars = "";
-
-//     for (let letterOBJ of catPhrase.lettersList) {
-//         chars += letterOBJ.letter + "[" + letterOBJ.hasPicked + "]" + ", ";
-//     }
-
-//     console.log(catPhrase.category + " : " + catPhrase.phrase + " : " + chars);
-// }
-
-
-// document.onkeyup = function (event) {
-//     let testBlah = myCW.getNextPhrase();
-
-
-//     console.log("Next Phrase : " + testBlah.phrase);
-//     console.log(testBlah.lettersList[0].letter + " : " + testBlah.lettersList[0].hasPicked);
-//     testBlah.lettersList[0].markAsPicked();
-//     console.log(testBlah.lettersList[0].letter + " : " + testBlah.lettersList[0].hasPicked);
-
-//     testBlah.resetLettersList();
-
-//     let historyList = "";
-//     for (let item of myCW._history) {
-//         historyList += item.phrase + ", ";
-//     }
-//     console.log(historyList);
-// };
+launcher.startGame();

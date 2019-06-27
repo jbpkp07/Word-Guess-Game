@@ -1,66 +1,15 @@
 "use strict";
 
-class Letter {
-    constructor(letter) {
-        this._letter = letter;
-        this._hasPicked = false;
-    }
-
-    markAsPicked() { this._hasPicked = true; }
-    resetAsPicked() { this._hasPicked = false; }
-
-    get letter() { return this._letter; }
-    set letter(value) { throw new Error("Class:Letter:letter is PRIVATE"); }
-
-    get hasPicked() { return this._hasPicked; }
-    set hasPicked(value) { throw new Error("Class:Letter:hasPicked is PRIVATE"); }
-    // set hasPicked(value) { this._hasPicked = value; }
-}
-
-class CategoryPhrase {
-    constructor(category, phrase) {
-
-        this._category = category;
-        this._phrase = phrase;
-        this._lettersList = [];
-
-        this.buildLettersList();
-    }
-
-    buildLettersList() {
-
-        for (let ch of this._phrase) {
-            if (ch !== ' ') {
-                this._lettersList.push(new Letter(ch.toUpperCase()));
-            }
-        }
-    }
-
-    resetLettersList() {
-
-        for (let letter of this._lettersList) {
-            letter.resetAsPicked();
-        }
-    }
-
-    get category() { return this._category; }
-    set category(value) { throw new Error("Class:CategoryPhrase:category is PRIVATE"); }
-
-    get phrase() { return this._phrase; }
-    set phrase(value) { throw new Error("Class:CategoryPhrase:phrase is PRIVATE"); }
-
-    get lettersList() { return this._lettersList; }
-    set lettersList(value) { throw new Error("Class:CategoryPhrase:lettersList is PRIVATE"); }
-}
-
 class CategoryPhrases {
+
     constructor() {
-        this._history = [];
-        this._categoryPhrasesList = [];
+
+        this._History = [];
+        this._CategoryPhrasesList = [];
 
         this.addHardwarePhrase("CPU");
-        this.addHardwarePhrase("Memory");
-        this.addHardwarePhrase("Processor");
+        // this.addHardwarePhrase("Memory");
+        // this.addHardwarePhrase("Processor");
         // this.addHardwarePhrase("Firewall");
         // this.addHardwarePhrase("Ethernet");
         // this.addHardwarePhrase("Motherboard");
@@ -69,7 +18,7 @@ class CategoryPhrases {
         // this.addHardwarePhrase("File Server");
         // this.addHardwarePhrase("Terminal Server");
 
-        // this.addSoftwareDevelopmentPhrase("Inheritance");
+        this.addSoftwareDevelopmentPhrase("Inheritance");
         // this.addSoftwareDevelopmentPhrase("Overloading");
         // this.addSoftwareDevelopmentPhrase("Constructor");
         // this.addSoftwareDevelopmentPhrase("Polymorphism");
@@ -80,7 +29,7 @@ class CategoryPhrases {
         // this.addSoftwareDevelopmentPhrase("Tokenization");
         // this.addSoftwareDevelopmentPhrase("Regular Expression");
 
-        // this.addApplicationPhrase("Text Editor");
+        this.addApplicationPhrase("Text Editor");
         // this.addApplicationPhrase("PDF Reader");
         // this.addApplicationPhrase("Adobe Photoshop");
         // this.addApplicationPhrase("Microsoft Excel");
@@ -115,50 +64,167 @@ class CategoryPhrases {
     }
 
     addHardwarePhrase(phrase) {
-        this._categoryPhrasesList.push(new CategoryPhrase("Hardware", phrase));
+
+        this._CategoryPhrasesList.push(new CategoryPhrase("Hardware", phrase));
     }
 
     addSoftwareDevelopmentPhrase(phrase) {
-        this._categoryPhrasesList.push(new CategoryPhrase("Software Development", phrase));
+
+        this._CategoryPhrasesList.push(new CategoryPhrase("Software Development", phrase));
     }
 
     addApplicationPhrase(phrase) {
-        this._categoryPhrasesList.push(new CategoryPhrase("Application", phrase));
+
+        this._CategoryPhrasesList.push(new CategoryPhrase("Application", phrase));
     }
 
     addOperatingSystemPhrase(phrase) {
-        this._categoryPhrasesList.push(new CategoryPhrase("Operating System", phrase));
+
+        this._CategoryPhrasesList.push(new CategoryPhrase("Operating System", phrase));
     }
 
     addMiscellaneousPhrase(phrase) {
-        this._categoryPhrasesList.push(new CategoryPhrase("Miscellaneous", phrase));
+
+        this._CategoryPhrasesList.push(new CategoryPhrase("Miscellaneous", phrase));
     }
 
     getNextPhrase() {
+
         let nextPhrase;
 
         do {
-            if (this._categoryPhrasesList.length === this._history.length) {
+            if (this._CategoryPhrasesList.length === this._History.length) {
+
                 console.log("Out Of Phrases, Starting Over Sequence");
-                this._history.shift(); //remove first element
+                this._History.shift(); //remove first element
             }
 
-            let i = Math.floor(Math.random() * this._categoryPhrasesList.length);
-            nextPhrase = this._categoryPhrasesList[i];
+            let i = Math.floor(Math.random() * this._CategoryPhrasesList.length);
+            nextPhrase = this._CategoryPhrasesList[i];
 
-            if (!this._history.includes(nextPhrase)) {
-                this._history.push(nextPhrase);
+            if (!this._History.includes(nextPhrase)) {
+
+                this._History.push(nextPhrase);
                 break;
             }
         }
-        while (this._history.includes(nextPhrase));
+        while (this._History.includes(nextPhrase));
 
         return nextPhrase;
     }
 
-    get categoryPhrasesList() { return this._categoryPhrasesList; }
+    get categoryPhrasesList() { return this._CategoryPhrasesList; }
     set categoryPhrasesList(value) { throw new Error("Class:CategoryPhrases:categoryPhrasesList is PRIVATE"); }
 }
+
+
+class CategoryPhrase {
+
+    constructor(category, phrase) {
+
+        this._Category = category;
+        this._Phrase = phrase;
+        this._DisplayPhrase = "";
+        this._LettersList = [];
+
+        this.buildLettersList();
+        this.updateDisplayPhrase();
+    }
+
+    buildLettersList() {
+
+        for (let ch of this._Phrase) {
+
+            this._LettersList.push(new Letter(ch.toUpperCase()));
+        }
+    }
+
+    updateDisplayPhrase() {
+
+        this._DisplayPhrase = "";
+
+        for (let ltr of this._LettersList) {
+
+            if (ltr.hasPicked === true) {
+                this._DisplayPhrase += ltr.letter;
+            }
+            else {
+                this._DisplayPhrase += "_";
+            }
+        }
+    }
+
+    updateNewLetterPicked(btnElem) {
+
+        let newLetterSelected = btnElem.textContent;
+
+        for (let ltr of this._LettersList) {
+            
+            if (ltr.letter === newLetterSelected) {
+                
+                ltr.markAsPicked();
+            }
+        }
+
+        this.updateDisplayPhrase();
+    }
+
+    resetLettersList() {
+
+        for (let letter of this._LettersList) {
+
+            letter.resetAsPicked();
+        }
+    }
+
+    get category() { return this._Category; }
+    set category(value) { throw new Error("Class:CategoryPhrase:category is PRIVATE"); }
+
+    get phrase() { return this._Phrase; }
+    set phrase(value) { throw new Error("Class:CategoryPhrase:phrase is PRIVATE"); }
+
+    get displayPhrase() { return this._DisplayPhrase; }
+    set displayPhrase(value) { throw new Error("Class:CategoryPhrase:displayPhrase is PRIVATE"); }
+
+    get lettersList() { return this._LettersList; }
+    set lettersList(value) { throw new Error("Class:CategoryPhrase:lettersList is PRIVATE"); }
+}
+
+
+class Letter {
+
+    constructor(letter) {
+
+        this._Letter = letter;
+
+        if (this._Letter === " ") {
+            this._HasPicked = true;
+        }
+        else {
+            this._HasPicked = false;
+        }
+    }
+
+    markAsPicked() { 
+        
+        this._HasPicked = true; 
+    }
+    
+    resetAsPicked() { 
+
+        if (this._Letter !== " ") {
+            this._HasPicked = false;
+        }
+    }
+
+    get letter() { return this._Letter; }
+    set letter(value) { throw new Error("Class:Letter:letter is PRIVATE"); }
+
+    get hasPicked() { return this._HasPicked; }
+    set hasPicked(value) { throw new Error("Class:Letter:hasPicked is PRIVATE"); }
+}
+
+
 
 
 

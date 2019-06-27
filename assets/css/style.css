@@ -9,71 +9,97 @@ body, html {
     overflow-y: hidden;
 }
 
+.backgroundIMGZoomed {
+    transform: scale(3);
+    transition: 3s;
+}
 
 .backgroundIMG {
+    transform: scale(1);
+    transition: 3s;
+}
+
+.backgroundIMGZoomed, .backgroundIMG {
     background-attachment: fixed;
     background-image: url(../images/bg2Plane.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
-    overflow: auto;
-    /* animation: zoomin 10s linear; */
-  
-    transform: scale(3);
-    transition: 3s;
-    /* overflow-y:hidden; */
+    overflow: auto;  
 }
 
-
-.backgroundIMG:hover {
-    transform: scale(1);
-    transition: 3s;
+#startGame {
+    color: rgb(19, 221, 19);
+    font-size: 18pt;
+    position: fixed;
+    text-align: center;
+    top: 35%;
+    width: 100%;
 }
 
+.hideMain {
+    display: none;
+}
 
+.category {
+    color: rgb(19, 221, 19);
+    font-size: 18pt;
+    position: fixed;
+    text-align: center;
+    top: 35%;
+    width: 100%;
+}
 
+#categoryLabel {
+    position: relative;
+    right: 10px;
+}
 
 #category {
-    /* margin: 0 auto; */
-    text-align: center;
+    /* font-family: 'VT323', monospace; */
+    /* font-size: 24pt; */
+    /* font-weight: 100; */
+    position: relative;
+    left: 10px;
 }
 
+.phrase {
+    color: rgb(19, 221, 19);
+    font-family: 'VT323', monospace;
+    font-family: monospace;
+    font-size: 64pt;
+    font-weight: 100;
+    letter-spacing: 10px;
+    position: fixed;
+    text-align: center;
+    top: 42%;
+    width: 100%;
+}
 
 .lettersContainer {
-    /* background: red; */
     position: fixed;
     bottom: 5px;
     margin: 0 auto;
-
 }
 
 .lettersGrid {
     background: rgba(0,0,0,0.5);
     border-radius: 10px;
-    /* border: 2px solid black; */
-    /* left: 40%; */
-    /* bottom: 0; */
-    /* position: fixed; */
-    /* overflow: auto; */
     padding: 5px 25px 5px 20px;
-    /* padding-left: 20px; */
-    /* padding-right: 20px; */
     margin: 0 auto;
-    width: 420px;
-    /* width: 100%; */
-   
+    width: 360px;
 }
 
 .letter {
-    border: 3px solid rgb(19, 221, 19);
+    border: 2px solid rgb(19, 221, 19);
     color: rgb(19, 221, 19);
     transition-duration: 1.25s;
     transition-property: color, border;
 }
 
 .letter-selected {
-    border: 3px solid #555555;
+    border: 2px solid #555555;
     color: #333333;
     transition-duration: 1.25s;
     transition-property: color, border;
@@ -82,15 +108,15 @@ body, html {
 .letter, .letter-selected {
     background: rgba(0,0,0,0.5);
     border-radius: 10px;
-    font-size: 30pt;
-    font-weight: 600;
-    height: 60px;
+    font-size: 25pt;
+    font-weight: 500;
+    height: 50px;
     line-height: 1.0;
     margin: 4px 0px 4px 0px;
     padding-top: 5px;
     position: relative;
     right: 10px;
     text-align: center;
-    width: 60px;
+    width: 50px;
 }
 
