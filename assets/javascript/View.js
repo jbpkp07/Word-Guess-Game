@@ -6,54 +6,58 @@ class View {
         this._StartSequenceFinished = false;
     }
 
-    startSequence() {
+    startSequence(waitFunction) {
 
-        let startBTN = document.getElementById("showStartBtn");
+        this.hideStartBtn(2000);
 
-        startBTN.id = "hideStartBtn";
+        this.showInstructions(2000);
 
-        window.setTimeout(() => {
-            startBTN.style = "visibility: hidden;";
-            this.showHideInstructions();
-        }, 2000);
-    }
+        this.hideInstructions(7000);
 
-    showHideInstructions() {
+        this.hideStartGame(9000);
 
-        let instructions = document.getElementById("hideInstructions");
-
-        instructions.id = "showInstructions";
-
-        window.setTimeout(() => {
-            instructions.id = "fadeInstructions";
-            window.setTimeout(() => { this.hideStartGame(); }, 2000);
-        }, 5000);
-    }
-
-    hideStartGame() {
-        document.getElementById("showStartGame").id = "hideStartGame";
-
-        this._StartSequenceFinished = true;
-    }
-
-
-
-    waitFor(conditionFunction) {
-
-        const poll = resolve => {
-            if (conditionFunction()) { 
+        const poll = (resolve) => {
+            if (waitFunction()) {
                 resolve();
             }
-            else { 
-                setTimeout( () => poll(resolve), 100);
+            else {
+                setTimeout(() => poll(resolve), 100);
             }
-        }
-    
+        };
+
         return new Promise(poll);
     }
 
+    hideStartBtn(mSec) {
 
+        document.getElementById("startBtn").className = "hideStartBtn";
 
+        window.setTimeout(() => {
+            document.getElementById("startBtn").style = "visibility: hidden;";
+        }, mSec);
+    }
+
+    showInstructions(mSec) {
+
+        window.setTimeout(() => {
+            document.getElementById("instructions").className = "showInstructions";
+        }, mSec);
+    }
+
+    hideInstructions(mSec) {
+
+        window.setTimeout(() => {
+            document.getElementById("instructions").className = "fadeInstructions";
+        }, mSec);
+    }
+
+    hideStartGame(mSec) {
+        
+        window.setTimeout(() => {
+            document.getElementById("startGame").className = "hideStartGame";
+            // this._StartSequenceFinished = true;
+        }, mSec);
+    }
 
     updateCategory(category) {
         document.getElementById("category").textContent = category;
@@ -67,7 +71,7 @@ class View {
         document.getElementById("bg").className = "backgroundIMGZoomed";
     }
 
-    unZoomBackground() {
+    unZoomBackground(mSec) {
         document.getElementById("bg").className = "backgroundIMG";
     }
 

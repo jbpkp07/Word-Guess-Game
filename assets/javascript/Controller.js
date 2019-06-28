@@ -9,8 +9,6 @@ class Controller {
         this._StartSequenceInitiated = false;
 
         //HTML button elements-------------------------------------------------
-        this.Start_Btn = document.getElementById("showStartBtn");
-
         this.A_Btn = document.getElementById("A-btn");
         this.B_Btn = document.getElementById("B-btn");
         this.C_Btn = document.getElementById("C-btn");
@@ -39,43 +37,41 @@ class Controller {
         this.Z_Btn = document.getElementById("Z-btn");
 
         //Keyboard listeners---------------------------------------------------
-        document.addEventListener("keyup", (event) => {
+        // document.addEventListener("keyup", (event) => {
 
-            let keyPressed = event.key.toUpperCase();
+        //     let keyPressed = event.key.toUpperCase();
 
-            switch (keyPressed) {
-                case "A": this.selectLetter(this.A_Btn); break;
-                case "B": this.selectLetter(this.B_Btn); break;
-                case "C": this.selectLetter(this.C_Btn); break;
-                case "D": this.selectLetter(this.D_Btn); break;
-                case "E": this.selectLetter(this.E_Btn); break;
-                case "F": this.selectLetter(this.F_Btn); break;
-                case "G": this.selectLetter(this.G_Btn); break;
-                case "H": this.selectLetter(this.H_Btn); break;
-                case "I": this.selectLetter(this.I_Btn); break;
-                case "J": this.selectLetter(this.J_Btn); break;
-                case "K": this.selectLetter(this.K_Btn); break;
-                case "L": this.selectLetter(this.L_Btn); break;
-                case "M": this.selectLetter(this.M_Btn); break;
-                case "N": this.selectLetter(this.N_Btn); break;
-                case "O": this.selectLetter(this.O_Btn); break;
-                case "P": this.selectLetter(this.P_Btn); break;
-                case "Q": this.selectLetter(this.Q_Btn); break;
-                case "R": this.selectLetter(this.R_Btn); break;
-                case "S": this.selectLetter(this.S_Btn); break;
-                case "T": this.selectLetter(this.T_Btn); break;
-                case "U": this.selectLetter(this.U_Btn); break;
-                case "V": this.selectLetter(this.V_Btn); break;
-                case "W": this.selectLetter(this.W_Btn); break;
-                case "X": this.selectLetter(this.X_Btn); break;
-                case "Y": this.selectLetter(this.Y_Btn); break;
-                case "Z": this.selectLetter(this.Z_Btn); break;
-            }
-        });
+        //     switch (keyPressed) {
+        //         case "A": this.selectLetter(this.A_Btn); break;
+        //         case "B": this.selectLetter(this.B_Btn); break;
+        //         case "C": this.selectLetter(this.C_Btn); break;
+        //         case "D": this.selectLetter(this.D_Btn); break;
+        //         case "E": this.selectLetter(this.E_Btn); break;
+        //         case "F": this.selectLetter(this.F_Btn); break;
+        //         case "G": this.selectLetter(this.G_Btn); break;
+        //         case "H": this.selectLetter(this.H_Btn); break;
+        //         case "I": this.selectLetter(this.I_Btn); break;
+        //         case "J": this.selectLetter(this.J_Btn); break;
+        //         case "K": this.selectLetter(this.K_Btn); break;
+        //         case "L": this.selectLetter(this.L_Btn); break;
+        //         case "M": this.selectLetter(this.M_Btn); break;
+        //         case "N": this.selectLetter(this.N_Btn); break;
+        //         case "O": this.selectLetter(this.O_Btn); break;
+        //         case "P": this.selectLetter(this.P_Btn); break;
+        //         case "Q": this.selectLetter(this.Q_Btn); break;
+        //         case "R": this.selectLetter(this.R_Btn); break;
+        //         case "S": this.selectLetter(this.S_Btn); break;
+        //         case "T": this.selectLetter(this.T_Btn); break;
+        //         case "U": this.selectLetter(this.U_Btn); break;
+        //         case "V": this.selectLetter(this.V_Btn); break;
+        //         case "W": this.selectLetter(this.W_Btn); break;
+        //         case "X": this.selectLetter(this.X_Btn); break;
+        //         case "Y": this.selectLetter(this.Y_Btn); break;
+        //         case "Z": this.selectLetter(this.Z_Btn); break;
+        //     }
+        // });
 
         //Mouse listeners------------------------------------------------------
-        this.Start_Btn.addEventListener("click", (event) => { this.beginStartSequence(); });
-
         this.A_Btn.addEventListener("click", (event) => { this.selectLetter(this.A_Btn); });
         this.B_Btn.addEventListener("click", (event) => { this.selectLetter(this.B_Btn); });
         this.C_Btn.addEventListener("click", (event) => { this.selectLetter(this.C_Btn); });
@@ -106,27 +102,21 @@ class Controller {
 
     beginStartSequence() {
 
-        if (!this._StartSequenceInitiated) {
+        document.getElementById("startBtn").addEventListener("click", (event) => {
 
-            this._StartSequenceInitiated = true;
+            if (!this._StartSequenceInitiated) {
 
-            this._View.startSequence();
-        }
+                this._StartSequenceInitiated = true;
+
+                let hasFinishedPromise = this._View.startSequence( () => this._View.startSequenceFinished === true);
+
+                hasFinishedPromise.then( () => {
+                    alert("finished start sequence");
+                    this.beginNextPhrase();
+                });
+            }
+        });
     }
-
-    waitForStartSequenceToFinish() {
-        console.log(this._View.startSequenceFinished);
-
-        this._View.waitFor(() => this._View.startSequenceFinished === true)
-            .then(() => {
-                this.beginNextPhrase();
-            });
-
-
-    }
-
-
-
 
     selectLetter(btnElem) {
 
@@ -155,8 +145,6 @@ class Controller {
         this.unSelectAllLetters();
 
         this._Model.assignNextPhrase();
-
-        this._View.unZoomBackground();
 
         this._View.updateCategory(this._Model.currentPhrase.category);
 

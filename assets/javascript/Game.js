@@ -8,7 +8,7 @@ class Game {
 
         let controller = new Controller();
 
-        controller.waitForStartSequenceToFinish();
+        controller.beginStartSequence();
 
 
         // function sleep(seconds) 
@@ -76,24 +76,3 @@ class Game {
 let launcher = new Game();
 
 launcher.startGame();
-
-let flag = false;
-
-
-// function waitFor(conditionFunction) {
-
-//     const poll = resolve => {
-//         if (conditionFunction()) { 
-//             resolve();
-//         }
-//         else { 
-//             setTimeout( () => poll(resolve), 100);
-//         }
-//     }
-
-//     return new Promise(poll);
-// }
-
-
-// waitFor( () => flag === true)
-//   .then( () => console.log('the wait is over!'));

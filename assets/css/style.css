@@ -30,18 +30,18 @@ body, html {
     overflow: auto;  
 }
 
-#showStartGame {
+.showStartGame {
     position: fixed;
     text-align: center;
     top: 40%;
     width: 100%;
 }
 
-#hideStartGame {
+.hideStartGame {
     display: none;
 }
 
-#showStartBtn, #hideStartBtn { 
+.showStartBtn, .hideStartBtn { 
     border-radius: 15px;
     font-size: 24pt;
     margin: 0 auto;
@@ -49,18 +49,18 @@ body, html {
     width: 400px;
 }
 
-#showStartBtn {
+.showStartBtn {
     border: 3px solid rgb(19, 221, 19);
 }
 
-#hideStartBtn {
+.hideStartBtn {
     border: 3px solid black;
     color: black;
     transition-duration: 2s;
     transition-property: color, border;
 }
 
-#showInstructions, #hideInstructions, #fadeInstructions {
+.showInstructions, .hideInstructions, .fadeInstructions {
     bottom: 60px;
     font-size: 18pt;
     margin: 0 auto;
@@ -68,18 +68,18 @@ body, html {
     width: 960px;
 }
 
-#showInstructions {
+.showInstructions {
     color: rgb(19, 221, 19);
     transition-duration: 3s;
     transition-property: color;
 }
 
-#hideInstructions {
+.hideInstructions {
     color: black;
     visibility: hidden;
 }
 
-#fadeInstructions {
+.fadeInstructions {
     color: black;
     transition-duration: 3s;
     transition-property: color;
