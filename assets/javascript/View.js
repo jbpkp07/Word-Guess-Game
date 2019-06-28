@@ -14,7 +14,21 @@ class View {
 
         this.hideInstructions(7000);
 
-        this.hideStartGame(9000);
+        this.hideGameTitle(7000);
+
+        this.unZoomBackground(7000);
+
+        this.hideStartGame(11000);
+
+        this.showLettersGrid(11000);
+
+        this.showCategory(11000);
+
+        this.showPhrase(11000);
+
+        window.setTimeout(() => {
+            this._StartSequenceFinished = true;
+        }, 11000);
 
         const poll = (resolve) => {
             if (waitFunction()) {
@@ -51,29 +65,61 @@ class View {
         }, mSec);
     }
 
+    hideGameTitle(mSec) {
+
+        window.setTimeout(() => {
+            document.getElementById("gameTitle").className = "fadeGameTitle";
+        }, mSec);
+    }
+
     hideStartGame(mSec) {
         
         window.setTimeout(() => {
             document.getElementById("startGame").className = "hideStartGame";
-            // this._StartSequenceFinished = true;
+        }, mSec);
+    }
+
+    unZoomBackground(mSec) {
+
+        window.setTimeout(() => {
+            document.getElementById("bg").className = "backgroundIMG";
+        }, mSec);
+    }
+
+    showLettersGrid(mSec) {
+
+        window.setTimeout(() => {
+            document.getElementById("lettersContainer").className = "container-fluid lettersContainer";
+        }, mSec);
+    }
+
+    showCategory(mSec) {
+
+        window.setTimeout(() => {
+            document.getElementById("category").className = "fadeCategory";
+            window.setTimeout(() => { document.getElementById("category").className = "showCategory"; }, 100);
+        }, mSec);
+    }
+
+    showPhrase(mSec) {
+
+        window.setTimeout(() => {
+            document.getElementById("phrase").className = "fadePhrase";
+            window.setTimeout(() => { document.getElementById("phrase").className = "showPhrase"; }, 100);
         }, mSec);
     }
 
     updateCategory(category) {
-        document.getElementById("category").textContent = category;
+        document.getElementById("categoryText").textContent = category;
     }
 
     updatePhrase(phrase) {
         document.getElementById("phrase").textContent = phrase;
     }
 
-    zoomBackground() {
-        document.getElementById("bg").className = "backgroundIMGZoomed";
-    }
-
-    unZoomBackground(mSec) {
-        document.getElementById("bg").className = "backgroundIMG";
-    }
+    // zoomBackground() {
+    //     document.getElementById("bg").className = "backgroundIMGZoomed";
+    // }
 
     selectButton(btnElem) {
         btnElem.className = "letter-selected";

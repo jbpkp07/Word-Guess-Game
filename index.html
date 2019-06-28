@@ -5,13 +5,12 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Word Guess Game</title>
+    <title>Computer Hangman</title>
 
     <!-- Bootstrap Javascript references for navbar to toggle when screen is small (xs)-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323&display=swap">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
 
@@ -22,6 +21,9 @@
     <div id="bg" class="backgroundIMGZoomed"> </div>
 
     <div id="startGame" class="showStartGame">
+        <div id="gameTitle" class="showGameTitle">
+            Computer Hangman
+        </div>
         <div id="startBtn" class="showStartBtn">
             Click Here To Start Game
         </div>
@@ -30,116 +32,115 @@
         </div>
     </div>
 
-    <main id="main" class="hideMain">
+    <div id="category" class="hideCategory">
+        <span id="categoryLabel">Category :</span>
+        <span id="categoryText">Test</span>
+    </div>
 
-        <div class="category">
-            <label id="categoryLabel">Category :</label>
-            <span id="category"></span>
-        </div>
+    <div id="phrase" class="hidePhrase">
+        Phrase
+        <!-- <span id="phrase"></span> -->
+    </div>
 
-        <div class="phrase">
-            <span id="phrase"></span>
-        </div>
-
-        <div class="container-fluid lettersContainer">
-            <div class="lettersGrid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-2">
-                                <div class="letter" id="A-btn">A</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="B-btn">B</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="C-btn">C</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="D-btn">D</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="E-btn">E</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="F-btn">F</div>
-                            </div>
+    <div id="lettersContainer" class="container-fluid hideLettersContainer">
+        <div class="lettersGrid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="letter" id="A-btn">A</div>
                         </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <div class="letter" id="G-btn">G</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="H-btn">H</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="I-btn">I</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="J-btn">J</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="K-btn">K</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="L-btn">L</div>
-                            </div>
+                        <div class="col-2">
+                            <div class="letter" id="B-btn">B</div>
                         </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <div class="letter" id="M-btn">M</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="N-btn">N</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="O-btn">O</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="P-btn">P</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="Q-btn">Q</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="R-btn">R</div>
-                            </div>
+                        <div class="col-2">
+                            <div class="letter" id="C-btn">C</div>
                         </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <div class="letter" id="S-btn">S</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="T-btn">T</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="U-btn">U</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="V-btn">V</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="W-btn">W</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="X-btn">X</div>
-                            </div>
+                        <div class="col-2">
+                            <div class="letter" id="D-btn">D</div>
                         </div>
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="col-2">
-                                <div class="letter" id="Y-btn">Y</div>
-                            </div>
-                            <div class="col-2">
-                                <div class="letter" id="Z-btn">Z</div>
-                            </div>
+                        <div class="col-2">
+                            <div class="letter" id="E-btn">E</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="F-btn">F</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="letter" id="G-btn">G</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="H-btn">H</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="I-btn">I</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="J-btn">J</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="K-btn">K</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="L-btn">L</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="letter" id="M-btn">M</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="N-btn">N</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="O-btn">O</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="P-btn">P</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="Q-btn">Q</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="R-btn">R</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="letter" id="S-btn">S</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="T-btn">T</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="U-btn">U</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="V-btn">V</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="W-btn">W</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="X-btn">X</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-2">
+                            <div class="letter" id="Y-btn">Y</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="letter" id="Z-btn">Z</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-    </main>
+
 
     <footer>
 

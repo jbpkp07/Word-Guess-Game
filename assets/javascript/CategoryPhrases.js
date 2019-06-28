@@ -7,7 +7,7 @@ class CategoryPhrases {
         this._History = [];
         this._CategoryPhrasesList = [];
 
-        this.addHardwarePhrase("CPU");
+        //this.addHardwarePhrase("CPU");
         // this.addHardwarePhrase("Memory");
         // this.addHardwarePhrase("Processor");
         // this.addHardwarePhrase("Firewall");
@@ -18,18 +18,18 @@ class CategoryPhrases {
         // this.addHardwarePhrase("File Server");
         // this.addHardwarePhrase("Terminal Server");
 
-        this.addSoftwareDevelopmentPhrase("Inheritance");
+        //this.addSoftwareDevelopmentPhrase("Inheritance");
         // this.addSoftwareDevelopmentPhrase("Overloading");
         // this.addSoftwareDevelopmentPhrase("Constructor");
         // this.addSoftwareDevelopmentPhrase("Polymorphism");
         // this.addSoftwareDevelopmentPhrase("Interpreter");
         // this.addSoftwareDevelopmentPhrase("Database Connector");
         // this.addSoftwareDevelopmentPhrase("Private Member");
-        // this.addSoftwareDevelopmentPhrase("Just In Time Compilation");
+        this.addSoftwareDevelopmentPhrase("Just In Time Compilation");
         // this.addSoftwareDevelopmentPhrase("Tokenization");
         // this.addSoftwareDevelopmentPhrase("Regular Expression");
 
-        this.addApplicationPhrase("Text Editor");
+        //this.addApplicationPhrase("Text Editor");
         // this.addApplicationPhrase("PDF Reader");
         // this.addApplicationPhrase("Adobe Photoshop");
         // this.addApplicationPhrase("Microsoft Excel");
@@ -37,7 +37,7 @@ class CategoryPhrases {
         // this.addApplicationPhrase("Apple Final Cut Pro");
         // this.addApplicationPhrase("Google Chrome");
         // this.addApplicationPhrase("Mozilla Firefox");
-        // this.addApplicationPhrase("Microsoft Visual Studio");
+        //this.addApplicationPhrase("Microsoft Visual Studio");
         // this.addApplicationPhrase("Adobe Illustrator");
 
         // this.addOperatingSystemPhrase("Windows Vista");
@@ -53,7 +53,7 @@ class CategoryPhrases {
 
         // this.addMiscellaneousPhrase("Ctrl Alt Delete");
         // this.addMiscellaneousPhrase("Blind Carbon Copy");
-        // this.addMiscellaneousPhrase("Remote Desktop Session");
+        //this.addMiscellaneousPhrase("Remote Desktop Session");
         // this.addMiscellaneousPhrase("Reply All");
         // this.addMiscellaneousPhrase("Concatenate");
         // this.addMiscellaneousPhrase("Contiguous");

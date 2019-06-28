@@ -8,6 +8,7 @@ body, html {
     margin: 0;
     overflow-x: hidden;
     overflow-y: hidden;
+    transition-timing-function: ease;
 }
 
 .backgroundIMGZoomed {
@@ -22,7 +23,7 @@ body, html {
 
 .backgroundIMGZoomed, .backgroundIMG {
     background-attachment: fixed;
-    background-image: url(../images/bg2Plane.png);
+    background-image: url(../images/bg2Plane.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -41,12 +42,26 @@ body, html {
     display: none;
 }
 
+.showGameTitle, .fadeGameTitle {
+    bottom: 60px;
+    font-size: 64pt;
+    margin: 0 auto;
+    position: relative;
+    width: 960px;
+}
+
+.fadeGameTitle {
+    color: black;
+    transition-duration: 4s;
+    transition-property: color;
+}
+
 .showStartBtn, .hideStartBtn { 
     border-radius: 15px;
-    font-size: 24pt;
+    font-size: 16pt;
     margin: 0 auto;
-    padding: 10px 10px 15px 10px;
-    width: 400px;
+    padding: 5px 5px 10px 5px;
+    width: 280px;
 }
 
 .showStartBtn {
@@ -61,35 +76,36 @@ body, html {
 }
 
 .showInstructions, .hideInstructions, .fadeInstructions {
-    bottom: 60px;
-    font-size: 18pt;
+    bottom: 45px;
+    font-size: 16pt;
     margin: 0 auto;
     position: relative;
     width: 960px;
 }
 
 .showInstructions {
-    color: rgb(19, 221, 19);
     transition-duration: 3s;
     transition-property: color;
 }
 
-.hideInstructions {
+.hideInstructions, .fadeInstructions {
     color: black;
+}
+
+.hideInstructions {
     visibility: hidden;
 }
 
 .fadeInstructions {
-    color: black;
-    transition-duration: 3s;
+    transition-duration: 4s;
     transition-property: color;
 }
 
-.hideMain {
+.hideCategory {
     display: none;
 }
 
-.category {
+.fadeCategory, .showCategory {
     font-size: 18pt;
     position: fixed;
     text-align: center;
@@ -97,35 +113,62 @@ body, html {
     width: 100%;
 }
 
-#categoryLabel {
-    position: relative;
-    right: 10px;
+.fadeCategory {
+    color: black;
 }
 
-#category {
-    /* font-family: 'VT323', monospace; */
-    /* font-size: 24pt; */
-    /* font-weight: 100; */
+.showCategory {
+    transition-duration: 3s;
+    transition-property: color;
+}
+
+#categoryLabel {
+    position: relative;
+    right: 10px;  
+}
+
+#categoryText {
+
     position: relative;
     left: 10px;
 }
 
-.phrase {
-    /* font-family: 'VT323', monospace; */
+.hidePhrase {
+    display: none;
+}
+
+.fadePhrase, .showPhrase {
     font-family: monospace;
-    font-size: 64pt;
+    font-size: 42pt;
     font-weight: 100;
     letter-spacing: 10px;
     position: fixed;
     text-align: center;
-    top: 42%;
+    top: 45%;
     width: 100%;
+}
+
+.fadePhrase {
+    color: black;
+}
+
+.showPhrase {
+    transition-duration: 3s;
+    transition-property: color;
+}
+
+.hideLettersContainer {
+    position: fixed;
+    bottom: -360px;
+    margin: 0 auto;
 }
 
 .lettersContainer {
     position: fixed;
     bottom: 5px;
     margin: 0 auto;
+    transition-duration: 1.5s;
+    transition-property: all;
 }
 
 .lettersGrid {
