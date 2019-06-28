@@ -1,4 +1,5 @@
 "use strict";
+/* global CategoryPhrases */
 
 class Model {
 
@@ -18,12 +19,21 @@ class Model {
         
         this._LetterElementsSelected.push(btnElem);
 
-        this._CurrentPhrase.updateNewLetterPicked(btnElem);
+        let isPickCorrect = this._CurrentPhrase.updateNewLetterPicked(btnElem);
+
+        return isPickCorrect;
+    }
+
+    isPhraseCompleted() {
+
+        return this._CurrentPhrase.areAllLettersPicked();
     }
 
     clearLettersSelected() {
 
         this._LetterElementsSelected = [];
+
+        this._CurrentPhrase.resetLettersList();
     }
 
     get categoryPhrases() { return this._CategoryPhrases; }

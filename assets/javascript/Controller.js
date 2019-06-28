@@ -1,4 +1,5 @@
 "use strict";
+/* global View, Model */
 
 class Controller {
 
@@ -6,7 +7,7 @@ class Controller {
 
         this._View = new View();
         this._Model = new Model();
-        this._StartSequenceInitiated = false;
+        this._IsStartSequenceInitiated = false;
 
         //HTML button elements-------------------------------------------------
         this.A_Btn = document.getElementById("A-btn");
@@ -73,19 +74,31 @@ class Controller {
 
                 this._StartSequenceInitiated = true;
 
-                let hasFinishedPromise = this._View.startSequence(() => this._View.startSequenceFinished === true);
-
-                hasFinishedPromise.then(() => {
-                    // alert("finished start sequence");
-                    this.assignKeyboardListeners();
-                    this.beginNextPhrase();
-                });
+                this._View.startSequence();
             }
         });
+       
+        let hasFinishedPromise = this.createPromise( () => this._View.isStartSequenceFinished === true );
+       
+        return hasFinishedPromise;
     }
 
-    assignKeyboardListeners() {
-        
+    createPromise(waitFunction) {
+
+        const poll = (resolve) => {
+            if (waitFunction()) {
+                resolve();
+            }
+            else {
+                setTimeout(() => poll(resolve), 100);
+            }
+        };
+
+        return new Promise(poll);
+    }
+
+    assignKeyboardListener() {
+
         document.addEventListener("keyup", (event) => {
 
             let keyPressed = event.key.toUpperCase();
@@ -125,11 +138,16 @@ class Controller {
 
         if (!this._Model.letterElementsSelected.includes(btnElem)) {
 
-            this._Model.newLetterElementSelected(btnElem);
+            let isPickCorrect = this._Model.newLetterElementSelected(btnElem);
 
-            this._View.selectButton(btnElem);
+            this._View.selectButton(btnElem, isPickCorrect);
 
             this._View.updatePhrase(this._Model.currentPhrase.displayPhrase);
+
+            if (this._Model.isPhraseCompleted()) {
+
+                window.setTimeout( () => { this.beginNextPhrase(); }, 2000);
+            }
         }
     }
 
@@ -145,9 +163,9 @@ class Controller {
 
     beginNextPhrase() {
 
-        this.unSelectAllLetters();
-
         this._Model.assignNextPhrase();
+
+        this.unSelectAllLetters();
 
         this._View.updateCategory(this._Model.currentPhrase.category);
 

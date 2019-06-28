@@ -1,78 +1,27 @@
 "use strict";
+/* global Controller */
 
 class Game {
 
-    constructor() { }
+    constructor() { 
+
+        this._Controller = new Controller();
+    }
 
     startGame() {
 
-        let controller = new Controller();
+        let hasFinishedPromise = this._Controller.beginStartSequence();
+     
+        hasFinishedPromise.then(() => {
 
-        controller.beginStartSequence();
-
-
-        // function sleep(seconds) 
-        // {
-        //   var e = new Date().getTime() + (seconds * 1000);
-        //   while (new Date().getTime() <= e) {}
-        // }
-
-        // sleep(5);
-
-
-        // controller.beginNextPhrase();
-
-
-
-        // document.addEventListener("keyup", (event) => {
-
-        //     let zoomed = true;
-
-        //     let keyPressed = event.key.toUpperCase();
-
-        //     switch (keyPressed) {
-        //         case "SHIFT":
-        //             this._Controller.unSelectAllLetters();
-        //             if (zoomed) {
-        //                 this._Controller._View.unZoomBackground();
-        //                 zoomed = false;
-        //             }
-        //             else {
-        //                 this._Controller._View.zoomBackground();
-        //                 zoomed = true;
-        //             }
-
-        //             break;
-        //     }
-
-        //     let nextPhrase = controller._CategoryPhrases.getNextPhrase();
-
-        //     controller._View.updateCategory(nextPhrase.category);
-
-        //     let builtPhrase = "";
-
-        //     for (let ltr of nextPhrase.lettersList) {
-        //         if (ltr.hasPicked === true) {
-        //             builtPhrase += ltr.letter;
-        //         }
-        //         else {
-        //             builtPhrase += "_";
-        //         }
-
-        //     }
-        //     console.log(nextPhrase.phrase);
-
-        //     for (let ltr of nextPhrase.lettersList) {
-        //         console.log(ltr.letter + " : " + ltr.hasPicked);
-        //     }
-
-        //     //controller._View.updatePhrase(builtPhrase);
-        // });
+            this.continueGame();
+        });
     }
 
+    continueGame() {
 
+        this._Controller.assignKeyboardListener();
+
+        this._Controller.beginNextPhrase();
+    }
 }
-
-let launcher = new Game();
-
-launcher.startGame();

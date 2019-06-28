@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    cursor: crosshair;
+    caret-color: red;
 }
 
 body, html {
@@ -185,14 +187,22 @@ body, html {
     transition-property: color, border;
 }
 
-.letter-selected {
-    border: 2px solid #555555;
+.letter-selected-wrong {
+    border: 2px solid rgba(255, 0, 0, 0.5);
     color: #333333;
     transition-duration: 1.25s;
     transition-property: color, border;
 }
 
-.letter, .letter-selected {
+.letter-selected-correct {
+    /* border: 2px solid #555555; */
+    border: 2px solid rgba(19, 221, 19, 0.5);
+    color: #333333;
+    transition-duration: 1.25s;
+    transition-property: color, border;
+}
+
+.letter, .letter-selected-correct, .letter-selected-wrong {
     background: rgba(0,0,0,0.5);
     border-radius: 10px;
     font-size: 25pt;

@@ -7,7 +7,7 @@ class CategoryPhrases {
         this._History = [];
         this._CategoryPhrasesList = [];
 
-        //this.addHardwarePhrase("CPU");
+        this.addHardwarePhrase("CPU");
         // this.addHardwarePhrase("Memory");
         // this.addHardwarePhrase("Processor");
         // this.addHardwarePhrase("Firewall");
@@ -37,7 +37,7 @@ class CategoryPhrases {
         // this.addApplicationPhrase("Apple Final Cut Pro");
         // this.addApplicationPhrase("Google Chrome");
         // this.addApplicationPhrase("Mozilla Firefox");
-        //this.addApplicationPhrase("Microsoft Visual Studio");
+        // this.addApplicationPhrase("Microsoft Visual Studio");
         // this.addApplicationPhrase("Adobe Illustrator");
 
         // this.addOperatingSystemPhrase("Windows Vista");
@@ -96,15 +96,18 @@ class CategoryPhrases {
             if (this._CategoryPhrasesList.length === this._History.length) {
 
                 console.log("Out Of Phrases, Starting Over Sequence");
+
                 this._History.shift(); //remove first element
             }
 
             let i = Math.floor(Math.random() * this._CategoryPhrasesList.length);
+
             nextPhrase = this._CategoryPhrasesList[i];
 
             if (!this._History.includes(nextPhrase)) {
 
                 this._History.push(nextPhrase);
+
                 break;
             }
         }
@@ -122,12 +125,13 @@ class CategoryPhrase {
 
     constructor(category, phrase) {
 
-        this._Category = category;
-        this._Phrase = phrase;
+        this._Category      = category;
+        this._Phrase        = phrase;
         this._DisplayPhrase = "";
-        this._LettersList = [];
+        this._LettersList   = [];
 
         this.buildLettersList();
+        
         this.updateDisplayPhrase();
     }
 
@@ -156,17 +160,31 @@ class CategoryPhrase {
 
     updateNewLetterPicked(btnElem) {
 
+        let isPickCorrect = false;
         let newLetterSelected = btnElem.textContent;
 
         for (let ltr of this._LettersList) {
-            
-            if (ltr.letter === newLetterSelected) {
-                
+
+            if (ltr.letter === newLetterSelected && ltr.hasPicked === false) {
+
                 ltr.markAsPicked();
+
+                isPickCorrect = true;
             }
         }
 
         this.updateDisplayPhrase();
+
+        return isPickCorrect;
+    }
+
+    areAllLettersPicked() {
+
+        if (!this._LettersList.some((ltr) => ltr.hasPicked === false)) {
+            return true;
+        }
+
+        return false;
     }
 
     resetLettersList() {
@@ -175,6 +193,8 @@ class CategoryPhrase {
 
             letter.resetAsPicked();
         }
+
+        this.updateDisplayPhrase();
     }
 
     get category() { return this._Category; }
@@ -205,12 +225,12 @@ class Letter {
         }
     }
 
-    markAsPicked() { 
-        
-        this._HasPicked = true; 
+    markAsPicked() {
+
+        this._HasPicked = true;
     }
-    
-    resetAsPicked() { 
+
+    resetAsPicked() {
 
         if (this._Letter !== " ") {
             this._HasPicked = false;

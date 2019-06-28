@@ -3,10 +3,10 @@
 class View {
 
     constructor() {
-        this._StartSequenceFinished = false;
+        this._IsStartSequenceFinished = false;
     }
 
-    startSequence(waitFunction) {
+    startSequence() {
 
         this.hideStartBtn(2000);
 
@@ -27,19 +27,8 @@ class View {
         this.showPhrase(11000);
 
         window.setTimeout(() => {
-            this._StartSequenceFinished = true;
+            this._IsStartSequenceFinished = true;
         }, 11000);
-
-        const poll = (resolve) => {
-            if (waitFunction()) {
-                resolve();
-            }
-            else {
-                setTimeout(() => poll(resolve), 100);
-            }
-        };
-
-        return new Promise(poll);
     }
 
     hideStartBtn(mSec) {
@@ -47,7 +36,7 @@ class View {
         document.getElementById("startBtn").className = "hideStartBtn";
 
         window.setTimeout(() => {
-            document.getElementById("startBtn").style = "visibility: hidden;";
+            document.getElementById("startBtn").style.visibility = "hidden";
         }, mSec);
     }
 
@@ -121,14 +110,20 @@ class View {
     //     document.getElementById("bg").className = "backgroundIMGZoomed";
     // }
 
-    selectButton(btnElem) {
-        btnElem.className = "letter-selected";
+    selectButton(btnElem, isPickCorrect) {
+        
+        if (isPickCorrect) {
+            btnElem.className = "letter-selected-correct";
+        }
+        else {
+            btnElem.className = "letter-selected-wrong";
+        }
     }
 
     unSelectButton(btnElem) {
         btnElem.className = "letter";
     }
 
-    get startSequenceFinished() { return this._StartSequenceFinished; }
-    set startSequenceFinished(value) { throw new Error("Class:View:startSequenceFinished is PRIVATE"); }
+    get isStartSequenceFinished() { return this._IsStartSequenceFinished; }
+    set isStartSequenceFinished(value) { throw new Error("Class:View:isStartSequenceFinished is PRIVATE"); }
 }
