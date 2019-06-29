@@ -181,6 +181,7 @@ class CategoryPhrase {
     areAllLettersPicked() {
 
         if (!this._LettersList.some((ltr) => ltr.hasPicked === false)) {
+
             return true;
         }
 
@@ -243,41 +244,3 @@ class Letter {
     get hasPicked() { return this._HasPicked; }
     set hasPicked(value) { throw new Error("Class:Letter:hasPicked is PRIVATE"); }
 }
-
-
-
-
-
-// let myCP = new CategoryPhrases();
-
-
-// for (let catPhrase of myCP.categoryPhrasesList) {
-
-//     let chars = "";
-
-//     for (let letterOBJ of catPhrase.lettersList) {
-//         chars += letterOBJ.letter + "[" + letterOBJ.hasPicked + "]" + ", ";
-//     }
-
-//     console.log(catPhrase.category + " : " + catPhrase.phrase + " : " + chars);
-// }
-
-
-// document.onkeyup = function (event) {
-//     let testBlah = myCP.getNextPhrase();
-
-
-//     console.log("Next Phrase : " + testBlah.phrase);
-//     console.log(testBlah.lettersList[0].letter + " : " + testBlah.lettersList[0].hasPicked);
-//     testBlah.lettersList[0].markAsPicked();
-//     console.log(testBlah.lettersList[0].letter + " : " + testBlah.lettersList[0].hasPicked);
-
-//     testBlah.resetLettersList();
-
-//     let historyList = "";
-//     for (let item of myCP._history) {
-//         historyList += item.phrase + ", ";
-//     }
-//     console.log(historyList);
-// };
-

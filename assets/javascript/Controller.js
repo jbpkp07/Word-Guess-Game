@@ -1,5 +1,5 @@
 "use strict";
-/* global View, Model */
+/* global View, Model, PhraseStatus, CategoryPhrase */
 
 class Controller {
 
@@ -139,35 +139,51 @@ class Controller {
 
         if (!this._Model.letterElementsSelected.includes(btnElem)) {
  
-            let isPickCorrect = this._Model.newLetterElementSelected(btnElem);
-
-            this._View.selectButton(btnElem, isPickCorrect);
+            this._Model.newLetterElementSelected(btnElem);
 
             this._View.updatePhrase(this._Model.currentPhrase.displayPhrase);
 
-            let status = this._Model.getPhraseStatusAndReset();
+            this._View.selectButton(btnElem, this._Model.getStatus.isPickCorrect);
 
-            if (status !== "CONTINUE") {
+            let status = this._Model.getStatus.status;
 
-                if (status === "GUESSED") {
+            if (status !== PhraseStatus.continue) {
+
+                if (status === PhraseStatus.guessed) {
                     alert("You win!");
+                    this.completedPhrase(true);
                 }
-                else {
+                else if (status === PhraseStatus.failed) {
+
+                    this._View.updatePhrase(this._Model.currentPhrase.phrase);
                     alert("You Lose!");
+                    this.completedPhrase(false);
                 }
-
-                this.completedPhrase();
             }
-            // if (this._Model.isPhraseCompleted()) {
-
-            //    this.completedPhrase();
-            // }
         }
     }
 
-    completedPhrase() {
+    completedPhrase(isGuessedCorrectly) {
         
-        window.setTimeout( () => { this.beginNextPhrase(); }, 2000);
+        if (isGuessedCorrectly) {
+
+            window.setTimeout( () => { this.beginNextPhrase(); }, 2000);
+        }
+        else {
+            
+            window.setTimeout( () => { this.beginNextPhrase(); }, 4000);
+        }
+    }
+
+    beginNextPhrase() {
+
+        this.unSelectAllLetters();
+
+        this._Model.assignNextPhrase();
+
+        this._View.updateCategory(this._Model.currentPhrase.category);
+
+        this._View.updatePhrase(this._Model.currentPhrase.displayPhrase);
     }
 
     unSelectAllLetters() {
@@ -176,18 +192,5 @@ class Controller {
 
             this._View.unSelectButton(btnElem);
         }
-
-        this._Model.clearLettersSelected();
-    }
-
-    beginNextPhrase() {
-
-        this._Model.assignNextPhrase();
-
-        this.unSelectAllLetters();
-
-        this._View.updateCategory(this._Model.currentPhrase.category);
-
-        this._View.updatePhrase(this._Model.currentPhrase.displayPhrase);
     }
 }
