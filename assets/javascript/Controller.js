@@ -86,6 +86,7 @@ class Controller {
     createPromise(waitFunction) {
 
         const poll = (resolve) => {
+
             if (waitFunction()) {
                 resolve();
             }
@@ -137,18 +138,36 @@ class Controller {
     selectLetter(btnElem) {
 
         if (!this._Model.letterElementsSelected.includes(btnElem)) {
-
+ 
             let isPickCorrect = this._Model.newLetterElementSelected(btnElem);
 
             this._View.selectButton(btnElem, isPickCorrect);
 
             this._View.updatePhrase(this._Model.currentPhrase.displayPhrase);
 
-            if (this._Model.isPhraseCompleted()) {
+            let status = this._Model.getPhraseStatusAndReset();
 
-                window.setTimeout( () => { this.beginNextPhrase(); }, 2000);
+            if (status !== "CONTINUE") {
+
+                if (status === "GUESSED") {
+                    alert("You win!");
+                }
+                else {
+                    alert("You Lose!");
+                }
+
+                this.completedPhrase();
             }
+            // if (this._Model.isPhraseCompleted()) {
+
+            //    this.completedPhrase();
+            // }
         }
+    }
+
+    completedPhrase() {
+        
+        window.setTimeout( () => { this.beginNextPhrase(); }, 2000);
     }
 
     unSelectAllLetters() {
