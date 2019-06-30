@@ -241,12 +241,12 @@ body, html {
 .letter, .letter-selected-correct, .letter-selected-wrong {
     background: rgba(0,0,0,0.5);
     border-radius: 10px;
-    font-size: 20pt;
+    font-size: 22pt;
     font-weight: 500;
     height: 42px;
     line-height: 1.0;
     margin: 4px 0px 4px 0px;
-    /* padding-top: 50px; */
+    padding-top: 2px;
     position: relative;
     right: 10px;
     text-align: center;
