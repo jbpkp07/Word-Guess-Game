@@ -22,7 +22,7 @@ class View {
 
         this.showLettersGrid(11000);
 
-        this.showCategory(11000);
+        this.showCategoryStats(11000);
 
         this.showPhrase(11000);
 
@@ -82,11 +82,11 @@ class View {
         }, mSec);
     }
 
-    showCategory(mSec) {
+    showCategoryStats(mSec) {
 
         window.setTimeout(() => {
-            document.getElementById("category").className = "fadeCategory";
-            window.setTimeout(() => { document.getElementById("category").className = "showCategory"; }, 100);
+            document.getElementById("categoryStats").className = "fadeCategoryStats";
+            window.setTimeout(() => { document.getElementById("categoryStats").className = "showCategoryStats"; }, 100);
         }, mSec);
     }
 
@@ -102,13 +102,55 @@ class View {
         document.getElementById("categoryText").textContent = category;
     }
 
-    updatePhrase(phrase) {
-        document.getElementById("phrase").textContent = phrase;
+    updatePhrase(phrase, isLoss) {
+
+        let phraseElement = document.getElementById("phrase");
+
+        if (isLoss) {
+
+            phraseElement.className += " loss";
+
+            window.setTimeout(() => {
+                phraseElement.className = "showPhrase";
+            }, 3000);
+        }
+
+        phraseElement.textContent = phrase;
     }
 
-    // zoomBackground() {
-    //     document.getElementById("bg").className = "backgroundIMGZoomed";
-    // }
+    updateGuessesRemaining(value, isCorrect) {
+
+        let guessesRemainingElement = document.getElementById("guessesRemaining");
+
+        if (!isCorrect) {
+
+            guessesRemainingElement.className = "incorrect";
+
+            window.setTimeout(() => {
+                guessesRemainingElement.className = "correct";
+            }, 1000);
+        }
+
+        document.getElementById("guessesRemaining").innerHTML = "Guesses Remaining : &nbsp;&nbsp;&nbsp;" + value.toString().padStart(6, "0");
+    }
+
+    updateWinsScore(wins, score, isLoss) {
+
+        let winsScoreElement = document.getElementById("winsScore");
+
+        if (isLoss) {
+
+            winsScoreElement.className = "loss";
+
+            window.setTimeout(() => {
+                winsScoreElement.className = "win";
+            }, 3000);
+        }
+
+        let update = "Wins : &nbsp;&nbsp;&nbsp;" + wins.toString().padStart(6, "0") + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Score : &nbsp;&nbsp;&nbsp;" + score.toString().padStart(6, "0");
+
+        winsScoreElement.innerHTML = update;
+    }
 
     selectButton(btnElem, isPickCorrect) {
         

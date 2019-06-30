@@ -3,24 +3,30 @@
 
 class Game {
 
-    constructor() { 
+    constructor() {
 
         this._Controller = new Controller();
+        this._IsStartSequenceInitiated = false;
     }
 
     startGame() {
 
-        let hasFinishedPromise = this._Controller.beginStartSequence();
-     
-        hasFinishedPromise.then(() => {
+        if (!this._IsStartSequenceInitiated) {
 
-            this.continueGame();
-        });
+            this._IsStartSequenceInitiated = true;
+
+            let hasFinishedPromise = this._Controller.beginStartSequence();
+
+            hasFinishedPromise.then(() => {
+
+                this.continueGame();
+            });
+        }
     }
 
     continueGame() {
 
-        this._Controller.assignKeyboardListener();
+        this._Controller.assignListeners();
 
         this._Controller.beginNextPhrase();
     }

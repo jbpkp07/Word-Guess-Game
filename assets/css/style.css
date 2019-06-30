@@ -1,7 +1,13 @@
 * {
     box-sizing: border-box;
     cursor: crosshair;
-    caret-color: red;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select:   none; /* Safari */
+    -khtml-user-select:    none; /* Konqueror HTML */
+    -moz-user-select:      none; /* Firefox */
+    -ms-user-select:       none; /* Internet Explorer/Edge */
+    user-select:           none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 body, html {
@@ -10,7 +16,6 @@ body, html {
     margin: 0;
     overflow-x: hidden;
     overflow-y: hidden;
-    transition-timing-function: ease;
 }
 
 .backgroundIMGZoomed {
@@ -103,25 +108,45 @@ body, html {
     transition-property: color;
 }
 
-.hideCategory {
+.hideCategoryStats {
     display: none;
 }
 
-.fadeCategory, .showCategory {
-    font-size: 18pt;
+.fadeCategoryStats, .showCategoryStats {
+    font-size: 14pt;
     position: fixed;
     text-align: center;
     top: 35%;
     width: 100%;
 }
 
-.fadeCategory {
+.fadeCategoryStats {
     color: black;
 }
 
-.showCategory {
+.showCategoryStats {
     transition-duration: 3s;
     transition-property: color;
+}
+
+#guessesRemaining {
+    position: absolute;
+    left: 2%;
+    transition-duration: 1s;
+    transition-property: color;
+}
+
+.incorrect {
+    color: red;
+    transition-duration: 1s;
+    transition-property: color;
+}
+
+#categoryBox {
+    border: 2px solid rgb(19, 221, 19);
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 5px 25px 10px 25px;
 }
 
 #categoryLabel {
@@ -130,9 +155,21 @@ body, html {
 }
 
 #categoryText {
-
     position: relative;
     left: 10px;
+}
+
+#winsScore {
+    position: absolute;
+    right: 2%;
+    transition-duration: 3s;
+    transition-property: color;
+}
+
+.loss {
+    color: red;
+    transition-duration: 3s;
+    transition-property: color;
 }
 
 .hidePhrase {
