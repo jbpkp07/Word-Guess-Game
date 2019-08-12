@@ -1,5 +1,7 @@
 # Word-Guess-Game
 
+https://jbpkp07.github.io/Word-Guess-Game
+
 This was written in vanilla Javascript, and html/CSS.
 
 The game is played like the game "Hangman".
